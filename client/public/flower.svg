@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="50.272953mm"
+   height="47.40366mm"
+   viewBox="0 0 50.272953 47.40366"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   sodipodi:docname="flower.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs2" />
+  <g
+     inkscape:groupmode="layer"
+     id="layer1"
+     inkscape:label="Layer 1"
+     transform="translate(-78.47124,-61.165631)">
+    <g
+       id="g10538"
+       transform="translate(2.8741758,4.1197376)">
+      <path
+         sodipodi:type="star"
+         style="fill:#dffa29;fill-opacity:1;stroke-width:0.265;stroke-dasharray:none"
+         id="path561"
+         inkscape:flatsided="false"
+         sodipodi:sides="6"
+         sodipodi:cx="87.809639"
+         sodipodi:cy="73.103516"
+         sodipodi:r1="18.547108"
+         sodipodi:r2="25.406996"
+         sodipodi:arg1="0.67189979"
+         sodipodi:arg2="1.1954986"
+         inkscape:rounded="0.15"
+         inkscape:randomized="0"
+         d="m 102.32536,84.648607 c -1.22925,1.545544 -3.365464,11.369685 -5.202798,12.09354 -1.837334,0.723856 -10.100301,-5.003315 -12.053407,-5.295105 -1.953105,-0.29179 -11.529166,2.770267 -13.07471,1.541017 -1.545544,-1.22925 -0.717152,-11.248775 -1.441008,-13.086109 -0.723855,-1.837334 -8.163705,-8.599417 -7.871915,-10.552522 0.29179,-1.953106 9.383149,-6.24546 10.612399,-7.791004 1.22925,-1.545544 3.365461,-11.369685 5.202795,-12.09354 1.837334,-0.723855 10.100301,5.003316 12.053407,5.295105 1.953105,0.29179 11.529167,-2.770267 13.074707,-1.541017 1.54555,1.22925 0.71716,11.248775 1.44101,13.086109 0.72386,1.837334 8.16371,8.599417 7.87192,10.552523 -0.29179,1.953105 -9.38315,6.245459 -10.6124,7.791003 z"
+         inkscape:transform-center-x="-1.4500649"
+         inkscape:transform-center-y="0.070142126"
+         transform="translate(12.923901,7.644207)" />
+      <circle
+         style="display:inline;fill:#000000;fill-opacity:1;stroke-width:0.264583"
+         id="path566"
+         cx="100.74677"
+         cy="80.880516"
+         r="8.1971426"
+         inkscape:label="path566" />
+    </g>
+  </g>
+</svg>
