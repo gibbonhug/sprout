@@ -11,13 +11,13 @@ import (
 
 type Flower struct {
 	ColorPetal string `json:"colorPetal"` // Hex color
-	ID int `json:"id"`
-	ParentID []uint `json:"parentID"` // Flowers may have 0,1,2, or more parents
-	ChildID []uint `json:"childID"`
+	ID         int    `json:"id"`
+	ParentID   []uint `json:"parentID"` // Flowers may have 0,1,2, or more parents
+	ChildID    []uint `json:"childID"`
 }
 
 // Dummy flowers to delete later
-var flowers = []Flower {
+var flowers = []Flower{
 	{ColorPetal: "000000", ID: 0}, {ColorPetal: "ff0000", ID: 1},
 }
 
@@ -25,9 +25,15 @@ func main() {
 	r := chi.NewRouter()
 	r.Use(middleware.Logger)
 
+	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
+		w.Write([]byte("hello"))
+	})
 	// flowers GET endpoint: Return JSON of all flowers
 	r.Get("/flowers", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
+		w.Header().Set("Access-Control-Allow-Origin", "http://127.0.0.1:5173")
+
+		//w.Header().Set("Cross-Origin-Resource-Policy", "cross-origin")
 
 		jsonFlowers, err := json.Marshal(flowers)
 

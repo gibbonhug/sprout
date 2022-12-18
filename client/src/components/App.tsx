@@ -1,17 +1,21 @@
 import '../scss/react_components/App.scss';
+import useSWR from 'swr';
 import Flower from './Flower';
+import { FlowerProps } from '../interfaces';
 
-export const SERVER_ENDPOINT = 'http://localhost/3000';
+export const SERVER_ENDPOINT = 'http://localhost:3000';
+
+const fetcher = (url: string) =>
+    fetch(`${SERVER_ENDPOINT}/${url}`).then((r) => r.json());
 
 function App() {
-    return (
-        <Flower
-            colorPetal="aaaaaa"
-            id={0}
-            parentID={null}
-            childID={null}
-        ></Flower>
-    );
+    // GET data from /flowers
+    const { data, mutate } = useSWR<FlowerProps[]>('flowers', fetcher);
+
+    console.log(data);
+    return data?.map((flowerData) => {
+        return <Flower key={flowerData.id} {...flowerData}></Flower>;
+    });
 }
 
 export default App;
