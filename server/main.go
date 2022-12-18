@@ -36,7 +36,6 @@ func main() {
 		}
 
 		w.Write(jsonFlowers)
-
 	})
 
 	http.ListenAndServe(":3000", r)
