@@ -7,7 +7,7 @@ import { FlowerProps } from '../interfaces';
  * @returns Colored box
  */
 function Flower(props: FlowerProps) {
-
+    
     // All styles except BG color written in SCSS file
     const dynamicStyle = {
         backgroundColor: "#" + props.colorPetal,

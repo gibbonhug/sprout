@@ -1,11 +1,9 @@
 import '../scss/react_components/App.scss';
+import Flower from './Flower';
 
 function App() {
     return (
-        <div className="App">
-            Hello, World
-            <div className="child">My world... my way...</div>
-        </div>
+        <Flower colorPetal='aaaaaa' id={0} parentID={null} childID={null}></Flower>
     );
 }
 
