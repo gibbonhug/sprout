@@ -6,8 +6,8 @@
  * - childID: Array of childrens' ids, if they exist
  */
 export interface FlowerProps {
-    colorPetal: string,
-    id: number,
-    parentID: number[] | null
-    childID : number[] | null
+    colorPetal: string;
+    id: number;
+    parentID: number[] | null;
+    childID: number[] | null;
 }
