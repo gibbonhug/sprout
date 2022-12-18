@@ -1,4 +1,3 @@
-import '../scss/main.scss';
 import '../scss/react_components/App.scss'
 
 function App() {
