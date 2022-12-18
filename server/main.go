@@ -9,12 +9,14 @@ import (
 )
 
 func main() {
-	defer fmt.Println("Serving on port 3000")
-
 	r := chi.NewRouter()
 	r.Use(middleware.Logger)
+
 	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte("welcome"))
 	})
+	
 	http.ListenAndServe(":3000", r)
+
+	fmt.Println("Serving on port 3000")
 }
