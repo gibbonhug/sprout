@@ -10,15 +10,24 @@ import (
 )
 
 type Flower struct {
+	ID         uint    `json:"id"` // ID of the flower
 	ColorPetal string `json:"colorPetal"` // Hex color
-	ID         uint    `json:"id"`
-	ParentID   []uint `json:"parentID"` // Flowers may have 0,1,2, or more parents
-	ChildID    []uint `json:"childID"`
 }
 
 type Box struct {
-	ID uint `json:"id"`
-	FlowerID uint `json:"box_flower"`
+	ID uint `json:"id"` // ID of the box
+	Flower *Flower `json:"box_flower"` // Pointer to the Flower it contains
+}
+
+type CloneRelationship struct {
+	ParentID uint `json:"parentID"` // ID of the parent flower
+	ChildID uint `json:"childID"` // ID of the child flower
+}
+
+type BreedRelationship struct {
+	Parent1ID uint `json:"parent1ID"` // ID of instigator parent flower
+	Parent2ID uint `json:"parent2ID"` // ID of the receiver parent flower
+	ChildID uint `json:"childID"` // ID of the child flower
 }
 
 // Dummy flowers to delete later
