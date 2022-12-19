@@ -7,7 +7,7 @@ import '../scss/react_components/Box.scss';
  * @returns Square div
  */
 function Box(props: BoxProps) {
-    return <div className="box">Hello {props.id}</div>;
+    return <div className="box">Box {props.id}</div>;
 }
 
 export default Box;
