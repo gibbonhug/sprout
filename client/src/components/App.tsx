@@ -15,12 +15,11 @@ function App() {
 
     return (
         <>
-            {!boxData && <div>Loading...</div>}(
+            {!boxData && <div>Loading...</div>}
             {boxData &&
-                boxData!.map(thisBox => {
-                    return <Box key={thisBox.id} {...thisBox}></Box>
+                boxData!.map((thisBox) => {
+                    return <Box key={thisBox.id} {...thisBox}></Box>;
                 })}
-            )
         </>
     );
 }
