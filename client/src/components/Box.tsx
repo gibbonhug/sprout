@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { BoxProps } from '../interfaces';
 import Flower from './Flower';
 import '../scss/react_components/Box.scss';
@@ -8,11 +9,40 @@ import '../scss/react_components/Box.scss';
  * @returns Square div
  */
 function Box(props: BoxProps) {
+    const [isSelected, setIsSelected] = useState(false);
+    const [selectedClassName, setSelectedClassName] =
+        useState('box unselected-box');
+
     const thisFlower = props.flower;
 
+    /**
+     * We want to add a yellow border to boxes when they are clicked, but
+     * only if they have a flower inside of them
+     *
+     * The border color is determined by the class of the box (see SCSS file)
+     *
+     * Clicking the box a second time will remove the border
+     */
+    const handleClick = () => {
+        console.log("you clicked me");
+        // Clicking an unselected box with a flower
+        if (!isSelected && thisFlower) {
+            console.log("event 1")
+            setIsSelected(true);
+            setSelectedClassName('box selected-box');
+        } else if (isSelected) {
+            // Clicking box a second time
+            console.log("event 2")
+            setIsSelected(false);
+            setSelectedClassName('box unselected-box');
+        }
+    };
+
     return (
-        <div className="box">
-            {thisFlower && <Flower key={thisFlower.id} {...thisFlower}></Flower>}
+        <div className={selectedClassName} onClick={handleClick}>
+            {thisFlower && (
+                <Flower key={thisFlower.id} {...thisFlower}></Flower>
+            )}
         </div>
     );
 }

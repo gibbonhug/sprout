@@ -5,7 +5,16 @@
     width: 100px;
     height: 100px;
     border-width: 1px;
-    border-color: black;
     border-style: solid;
     background: url('../../assets/Grass\ 10.png');
+}
+
+.box.selected-box {
+    border-color: yellow;
+    border-width: 2px;
+}
+
+.box.unselected-box {
+    border-color: black;
+    border-width: 1px;
 }
