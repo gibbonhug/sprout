@@ -1,6 +1,6 @@
 import useSWR from 'swr';
-import Flower from './Flower';
-import { FlowerProps } from '../interfaces';
+import Box from './Box';
+import { BoxProps } from '../interfaces';
 
 export const SERVER_ENDPOINT = 'http://localhost:3000';
 
@@ -8,13 +8,21 @@ const fetcher = (url: string) =>
     fetch(`${SERVER_ENDPOINT}/${url}`).then((r) => r.json());
 
 function App() {
-    // GET data from /flowers
-    const { data, mutate } = useSWR<FlowerProps[]>('flowers', fetcher);
+    // GET data from /boxes
+    const { data: boxData, mutate } = useSWR<BoxProps[]>('boxes', fetcher);
 
-    console.log(data);
-    return data?.map((flowerData) => {
-        return <Flower key={flowerData.id} {...flowerData}></Flower>;
-    });
+    console.log(boxData);
+
+    return (
+        <>
+            {!boxData && <div>Loading...</div>}(
+            {boxData &&
+                boxData!.map(thisBox => {
+                    return <Box key={thisBox.id} {...thisBox}></Box>
+                })}
+            )
+        </>
+    );
 }
 
 export default App;

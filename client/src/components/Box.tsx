@@ -1,4 +1,5 @@
 import { BoxProps } from '../interfaces';
+import '../scss/react_components/Box.scss';
 
 /**
  * A box (Square)
@@ -6,7 +7,7 @@ import { BoxProps } from '../interfaces';
  * @returns Square div
  */
 function Box(props: BoxProps) {
-    return <div className='box'></div>;
+    return <div className="box">Hello {props.id}</div>;
 }
 
 export default Box;
