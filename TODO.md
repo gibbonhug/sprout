@@ -16,6 +16,7 @@
   - [ ] Create database | decide database
   - [ ] User login/authentication
 - [ ] Create Go function to breed two flowers (weighted average towards middle of 2 colors); Later will have mutation % as part of Flower DNA etc etc
+- [x] Temporary JSON database
 
 ## Etc
 - [ ] Add more to TODO

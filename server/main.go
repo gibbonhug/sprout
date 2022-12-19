@@ -1,9 +1,9 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
 	"net/http"
+	"io/ioutil"
 
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
@@ -23,30 +23,31 @@ func main() {
 
 	// /boxes GET endpoint: Return JSON of all Boxes
 	r.Get("/boxes", func(w http.ResponseWriter, r *http.Request) {
+
 		w.Header().Set("Content-Type", "application/json")
 		w.Header().Set("Access-Control-Allow-Origin", "http://127.0.0.1:5173")
-
-		jsonBoxes, err := json.Marshal(Boxes)
+		
+		boxes, err := ioutil.ReadFile("./data/boxes.json")
 
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
 		}
 
-		w.Write(jsonBoxes)
+		w.Write(boxes)
 	})
 
 	// /flowers GET endpoint: Return JSON of all flowers
 	r.Get("/flowers", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 		w.Header().Set("Access-Control-Allow-Origin", "http://127.0.0.1:5173")
-
-		jsonFlowers, err := json.Marshal(Flowers)
+		
+		flowers, err := ioutil.ReadFile("./data/boxes.json")
 
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
 		}
 
-		w.Write(jsonFlowers)
+		w.Write(flowers)
 	})
 
 	// /relationships GET endpoint: Return JSON of all relationships
@@ -54,13 +55,13 @@ func main() {
 		w.Header().Set("Content-Type", "application/json")
 		w.Header().Set("Access-Control-Allow-Origin", "http://127.0.0.1:5173")
 
-		jsonRlns, err := json.Marshal(Relationships)
+		rlns, err := ioutil.ReadFile("./data/relationships.json")
 
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
 		}
 
-		w.Write(jsonRlns)
+		w.Write(rlns)
 	})
 
 	fmt.Println("Serving on port 3000")
