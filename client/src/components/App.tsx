@@ -1,4 +1,3 @@
-import '../scss/react_components/App.scss';
 import useSWR from 'swr';
 import Flower from './Flower';
 import { FlowerProps } from '../interfaces';

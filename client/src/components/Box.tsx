@@ -6,7 +6,7 @@ import { BoxProps } from '../interfaces';
  * @returns Square div
  */
 function Box(props: BoxProps) {
-    return <div></div>;
+    return <div className='box'></div>;
 }
 
 export default Box;
