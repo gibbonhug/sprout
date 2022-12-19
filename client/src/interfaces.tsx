@@ -1,13 +1,17 @@
 /**
- * See go 'Flower' struct
- * - colorPetal: Hex color of petals (without #)
+ * See Go 'Flower' struct
  * - id: Unique unsigned ID
- * - parentID: Array of parents' ids, if they exist
- * - childID: Array of childrens' ids, if they exist
- */
+ * - colorPetal: Hex color of petals (without #)
+*/
 export interface FlowerProps {
-    colorPetal: string;
     id: number;
-    parentID: number[] | null;
-    childID: number[] | null;
+    colorPetal: string;
+}
+
+/**
+ * See Go 'Box' struct
+ * - id: Unique unsigned ID
+ */
+export interface BoxProps {
+    id: number;
 }
