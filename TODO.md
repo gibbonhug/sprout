@@ -2,8 +2,9 @@
 
 ## Frontend/visual
 - [ ] Programatically shaped SVGs
+- [ ] Fetch, render and style Boxes and Flowers
+- [ ] Decide file/folder structure for nested react components' SCSS
 - [ ] Decide how to style app
-- [ ] Style Boxes
 - [x] Create flower SVG and use in App, fill color taken from props
 
 ## Backend/data

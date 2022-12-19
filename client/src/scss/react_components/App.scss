@@ -1,0 +1,7 @@
+// #box-grid contained .boxes from Box scss file
+
+#box-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    width: 400px; // Temporarily hardcoded because boxes are 100px
+}

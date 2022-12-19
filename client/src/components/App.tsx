@@ -1,6 +1,7 @@
 import useSWR from 'swr';
 import Box from './Box';
 import { BoxProps } from '../interfaces';
+import '../scss/react_components/App.scss';
 
 export const SERVER_ENDPOINT = 'http://localhost:3000';
 
@@ -16,10 +17,12 @@ function App() {
     return (
         <>
             {!boxData && <div>Loading...</div>}
-            {boxData &&
-                boxData!.map((thisBox) => {
-                    return <Box key={thisBox.id} {...thisBox}></Box>;
-                })}
+            <div id="box-grid">
+                {boxData &&
+                    boxData!.map((thisBox) => {
+                        return <Box key={thisBox.id} {...thisBox}></Box>;
+                    })}
+            </div>
         </>
     );
 }
