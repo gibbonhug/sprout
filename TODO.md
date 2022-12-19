@@ -1,12 +1,15 @@
 # TODO
 
 ## Frontend/visual
-- [ ] Create actual flower svgs (Unsure how to do this programmatically with genetically determining number of petals, petal shape, etc; for now just use color DNA/data)
+- [ ] Programatically shaped SVGs
 - [ ] Decide how to style app
+- [ ] Style Boxes
+- [x] Create flower SVG and use in App, fill color taken from props
 
 ## Backend/data
 - [ ] Structure backend more (not just main.go)
-  - [ ] Create models for Boxes (flower pots/patches) and Flowers, etc; Boxes have a Flower field and there are default 8 Boxes
+  - [ ] Create final structs for Boxes (flower pots/patches) and Flowers, relationships, etc
+  - [x] Design and create temporary structs
 - [ ] Store data in local storage + DB (user login)
   - [ ] Create database | decide database
   - [ ] User login/authentication
