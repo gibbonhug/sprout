@@ -8,9 +8,10 @@
 - [x] Create flower SVG and use in App, fill color taken from props
 
 ## Backend/data
-- [ ] Structure backend more (not just main.go)
+- [ ] Finish structuring backend more (not just main.go)
   - [ ] Create final structs for Boxes (flower pots/patches) and Flowers, relationships, etc
   - [x] Design and create temporary structs
+  - [x] Create new flower package
 - [ ] Store data in local storage + DB (user login)
   - [ ] Create database | decide database
   - [ ] User login/authentication
