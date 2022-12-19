@@ -5,7 +5,7 @@ import { FlowerProps } from '../interfaces';
  * @param props Props from JSON data. See FlowerProps documentation
  * @returns Colored SVG
  */
-function Flower(props: any) {
+function Flower(props: FlowerProps) {
     /*
         Grab the prop to use as fill color for SVG
         (TypeScript expects style svg property to be an object, not a string)
