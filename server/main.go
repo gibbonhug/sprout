@@ -103,8 +103,8 @@ func main() {
 		w.Write(jsonRlns)
 	})
 
+	fmt.Println("Serving on port 3000")
 
 	http.ListenAndServe(":3000", r)
 
-	fmt.Println("Serving on port 3000")
 }
