@@ -7,6 +7,10 @@
     border-width: 1px;
     border-style: solid;
     background: url('../../assets/Grass\ 10.png');
+    // Horizontally center children (Flower SVGs)
+    display: flex;
+    justify-content: center;
+
 }
 
 .box.selected-box {
