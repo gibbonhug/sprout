@@ -4,7 +4,7 @@ import (
 	"github.com/gibbonhug/sprout/flower"
 )
 
-// This file functions as a pseudo-temporary database for the application.
+// This file functions as a temporary pseudo-database for the application.
 
 // Dummy flowers to delete later
 var Flowers = []flower.Flower {
