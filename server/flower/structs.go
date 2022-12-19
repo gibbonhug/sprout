@@ -17,14 +17,14 @@ type Box struct {
 }
 
 // Cloning a flower producing a child
-type CloneRelationship struct {
+type CloneRln struct {
 	ID uint `json:"ID"` // ID of this relationship
 	ParentID uint `json:"parentID"` // ID of the parent flower
 	ChildID uint `json:"childID"` // ID of the child flower
 }
 
 // Breeding 2 flowers producing a child
-type PairRelationship struct {
+type PairRln struct {
 	ID uint `json:"ID"` // ID of this relationship
 	Parent1ID uint `json:"parent1ID"` // ID of instigator parent flower
 	Parent2ID uint `json:"parent2ID"` // ID of the receiver parent flower

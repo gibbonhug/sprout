@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"net/http"
 	"io/ioutil"
+	"net/http"
 
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
@@ -57,7 +57,7 @@ func main() {
 	// /pairrelationships GET endpoint: Return JSON of all breed relationships
 	r.Get("/pairrelationships", func(w http.ResponseWriter, r *http.Request) {
 		setLocalJSONHeaders(w)
-	
+
 		prlns, err := ioutil.ReadFile("./data/pairrelationships.json")
 
 		if err != nil {
@@ -65,6 +65,19 @@ func main() {
 		}
 
 		w.Write(prlns)
+	})
+
+	// /clonerelationships GET endpoint: Return JSON of all breed relationships
+	r.Get("/clonerelationships", func(w http.ResponseWriter, r *http.Request) {
+		setLocalJSONHeaders(w)
+
+		crlns, err := ioutil.ReadFile("./data/clonerelationships.json")
+
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusBadRequest)
+		}
+
+		w.Write(crlns)
 	})
 
 	fmt.Println("Serving on port 3000")
