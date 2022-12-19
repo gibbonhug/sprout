@@ -11,7 +11,7 @@ export interface FlowerProps {
 /**
  * See Go 'Box' struct
  * - id: Unique unsigned ID
- * - Flower: This box's flower, if it exists
+ * - flower: This box's flower, if it exists
  */
 export interface BoxProps {
     id: number;

@@ -1,4 +1,5 @@
 import { BoxProps } from '../interfaces';
+import Flower from './Flower';
 import '../scss/react_components/Box.scss';
 
 /**
@@ -7,7 +8,14 @@ import '../scss/react_components/Box.scss';
  * @returns Square div
  */
 function Box(props: BoxProps) {
-    return <div className="box">Box {props.id}</div>;
+    const thisFlower = props.flower;
+
+    return (
+        <div className="box">
+            Box {props.id}
+            {thisFlower && <Flower key={thisFlower.id} {...thisFlower}></Flower>}
+        </div>
+    );
 }
 
 export default Box;

@@ -18,7 +18,7 @@ type Flower struct {
 // Boxes flowers are stored in
 type Box struct {
 	ID uint `json:"id"` // ID of the box
-	Flower *Flower `json:"box_flower"` // Pointer to the Flower it contains
+	Flower *Flower `json:"flower"` // Pointer to the Flower it contains
 }
 
 // Cloning a flower producing a child
