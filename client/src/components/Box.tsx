@@ -24,15 +24,12 @@ function Box(props: BoxProps) {
      * Clicking the box a second time will remove the border
      */
     const handleClick = () => {
-        console.log("you clicked me");
         // Clicking an unselected box with a flower
         if (!isSelected && thisFlower) {
-            console.log("event 1")
             setIsSelected(true);
             setSelectedClassName('box selected-box');
         } else if (isSelected) {
             // Clicking box a second time
-            console.log("event 2")
             setIsSelected(false);
             setSelectedClassName('box unselected-box');
         }
