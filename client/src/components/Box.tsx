@@ -12,7 +12,6 @@ function Box(props: BoxProps) {
 
     return (
         <div className="box">
-            Box {props.id}
             {thisFlower && <Flower key={thisFlower.id} {...thisFlower}></Flower>}
         </div>
     );
