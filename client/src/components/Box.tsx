@@ -3,7 +3,7 @@ import { BoxProps } from '../interfaces';
 /**
  * A box (Square)
  * @param props Props from JSON data. See BoxProps documentation
- * @returns Colored SVG
+ * @returns Square div
  */
 function Box(props: BoxProps) {
     return <div></div>;
