@@ -9,21 +9,25 @@ import (
 	"github.com/go-chi/chi/v5/middleware"
 )
 
+// Flowers
 type Flower struct {
 	ID         uint    `json:"id"` // ID of the flower
 	ColorPetal string `json:"colorPetal"` // Hex color
 }
 
+// Boxes flowers are stored in
 type Box struct {
 	ID uint `json:"id"` // ID of the box
 	Flower *Flower `json:"box_flower"` // Pointer to the Flower it contains
 }
 
+// Cloning a flower producing a child
 type CloneRelationship struct {
 	ParentID uint `json:"parentID"` // ID of the parent flower
 	ChildID uint `json:"childID"` // ID of the child flower
 }
 
+// Breeding 2 flowers producing a child
 type BreedRelationship struct {
 	Parent1ID uint `json:"parent1ID"` // ID of instigator parent flower
 	Parent2ID uint `json:"parent2ID"` // ID of the receiver parent flower
