@@ -24,7 +24,7 @@ type CloneRelationship struct {
 }
 
 // Breeding 2 flowers producing a child
-type BreedRelationship struct {
+type PairRelationship struct {
 	ID uint `json:"ID"` // ID of this relationship
 	Parent1ID uint `json:"parent1ID"` // ID of instigator parent flower
 	Parent2ID uint `json:"parent2ID"` // ID of the receiver parent flower
