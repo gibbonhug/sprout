@@ -12,6 +12,7 @@ function App() {
     // GET data from /boxes
     const { data: boxData, mutate } = useSWR<BoxProps[]>('boxes', fetcher);
 
+
     console.log(boxData);
 
     return (

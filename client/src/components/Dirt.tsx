@@ -2,6 +2,7 @@ import { DirtProps } from "../interfaces";
 
 /**
  * A div to be nested inside a Box
+ * 
  * 125px wide, 20 px tall
  * 
  * To be used when clicking to clone flowers. (Destination Box will be the box associated with this Dirt.)
