@@ -1,2 +1,2 @@
 *.env
-/scripts
+run_server.sh
