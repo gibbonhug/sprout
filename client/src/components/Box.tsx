@@ -6,6 +6,11 @@ import '../scss/react_components/Box.scss';
 
 /**
  * A box (Square)
+ * 
+ * Boxes display Flower and Dirt child components
+ * 
+ * The user will have 8 Boxes to hold all of their flowers
+ * 
  * @param props Props from JSON data. See BoxProps documentation
  * @returns Square div
  */

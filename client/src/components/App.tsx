@@ -8,6 +8,13 @@ export const SERVER_ENDPOINT = 'http://localhost:3000';
 const fetcher = (url: string) =>
     fetch(`${SERVER_ENDPOINT}/${url}`).then((r) => r.json());
 
+/**
+ * App fetches Box data (Which contains data of boxed Flowers) with useSWR
+ * 
+ * App keeps track of currently clicked Box in state
+ * 
+ * @returns 8 Boxes
+ */
 function App() {
     // GET data from /boxes
     const { data: boxData, mutate } = useSWR<BoxProps[]>('boxes', fetcher);
