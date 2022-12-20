@@ -54,7 +54,7 @@ func main() {
 		w.Write(flowers)
 	})
 
-	// /pairrlns GET endpoint: Return JSON of all breed relationships
+	// /pairrlns GET endpoint: Return JSON of all pair relationships
 	r.Get("/pairrlns", func(w http.ResponseWriter, r *http.Request) {
 		setLocalJSONHeaders(w)
 
@@ -67,7 +67,7 @@ func main() {
 		w.Write(prlns)
 	})
 
-	// /clonerlns GET endpoint: Return JSON of all breed relationships
+	// /clonerlns GET endpoint: Return JSON of all clone relationships
 	r.Get("/clonerlns", func(w http.ResponseWriter, r *http.Request) {
 		setLocalJSONHeaders(w)
 
