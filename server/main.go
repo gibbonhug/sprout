@@ -18,7 +18,8 @@ func setLocalJSONHeaders(w http.ResponseWriter) {
 
 // Func creates a server on port 3000 with chi,
 // serving the dummy data defined in dummy.go on various GET endpoints.
-// This is done because database for this application does not exist yet, to be able to have basic functionality
+// This is done because database for this application does not exist yet, 
+// to be able to have basic functionality while developing
 func main() {
 	r := chi.NewRouter()
 	r.Use(middleware.Logger)
