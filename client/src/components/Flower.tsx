@@ -2,6 +2,9 @@ import { FlowerProps } from '../interfaces';
 
 /**
  * A 'flower' (Flower-shaped SVG)
+ * 
+ * Styling is done inside Box scss since Flowers are dumb components.
+ * 
  * @param props Props from JSON data. See FlowerProps documentation
  * @returns Colored SVG
  */

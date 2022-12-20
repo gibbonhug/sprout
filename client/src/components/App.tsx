@@ -20,7 +20,7 @@ function App() {
             <div id="box-grid">
                 {boxData &&
                     boxData!.map((thisBox) => {
-                        return <Box key={thisBox.id} {...thisBox}></Box>;
+                        return <Box key={"box" + thisBox.id} {...thisBox}></Box>;
                     })}
             </div>
         </>

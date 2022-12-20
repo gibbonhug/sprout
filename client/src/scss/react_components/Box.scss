@@ -4,13 +4,22 @@
     box-sizing: border-box;
     width: 125px;
     height: 125px;
-    border-width: 1px;
     border-style: solid;
     background: url('../../assets/Grass\ 10.png');
-    // Horizontally center children (Flower SVGs)
-    display: flex;
-    justify-content: center;
 
+    // Horizontally center children (Flower SVGs):
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+
+    overflow: hidden; // Keep dirts from overflowing border of their parent Boxes
+
+    .dirt {
+        width: 125px;
+        height: 20px;
+        background-color: #593a15;
+    }
 }
 
 .box.selected-box {

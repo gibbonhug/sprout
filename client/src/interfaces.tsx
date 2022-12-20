@@ -17,3 +17,10 @@ export interface BoxProps {
     id: number;
     flower: FlowerProps | null;
 }
+
+/**
+ * -id: The same id as the dirt's parent Box
+ */
+export interface DirtProps {
+    id: number;
+}

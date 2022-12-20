@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { BoxProps } from '../interfaces';
 import Flower from './Flower';
+import Dirt from './Dirt'; 
 import '../scss/react_components/Box.scss';
 
 /**
@@ -38,8 +39,10 @@ function Box(props: BoxProps) {
     return (
         <div className={selectedClassName} onClick={handleClick}>
             {thisFlower && (
-                <Flower key={thisFlower.id} {...thisFlower}></Flower>
+                <Flower key={"flower" + thisFlower.id} {...thisFlower}></Flower>
             )}
+
+            <Dirt key={"dirt" + props.id} id={props.id}></Dirt>
         </div>
     );
 }
