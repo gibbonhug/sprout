@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import useSWR from 'swr';
 import Box from './Box';
 import { BoxProps } from '../interfaces';
@@ -16,6 +17,9 @@ const fetcher = (url: string) =>
  * @returns 8 Boxes
  */
 function App() {
+    // The ID of the box of the currently selected flower (not the ID of the flower)
+    const [idSelectedFlowerBox, setIDSelectedFlowerBox] = useState<null | number>(null);
+
     // GET data from /boxes
     const { data: boxData, mutate } = useSWR<BoxProps[]>('boxes', fetcher);
 
