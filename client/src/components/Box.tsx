@@ -14,7 +14,7 @@ import '../scss/react_components/Box.scss';
  * @param props Props from JSON data. See BoxProps documentation
  * @returns Square div
  */
-function Box(props: BoxProps) {
+function Box(props: any) {
     const [isSelected, setIsSelected] = useState(false);
     const [selectedClassName, setSelectedClassName] =
         useState('box unselected-box');
