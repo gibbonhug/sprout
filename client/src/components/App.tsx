@@ -24,7 +24,7 @@ function App() {
     // GET data from /boxes
     const { data: boxData, mutate } = useSWR<BoxProps[]>('boxes', fetcher);
 
-
+    console.log("Data from /boxes:");
     console.log(boxData);
 
     return (
@@ -33,7 +33,7 @@ function App() {
             <div id="box-grid">
                 {boxData &&
                     boxData!.map((thisBox) => {
-                        return <Box key={"box" + thisBox.id} {...thisBox}></Box>;
+                        return <Box idSelectedFlowerBox={idSelectedFlowerBox} setIDSelectedFlowerBox={setIDSelectedFlowerBox} key={"box" + thisBox.id} {...thisBox}></Box>;
                     })}
             </div>
         </>
