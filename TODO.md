@@ -5,6 +5,7 @@
 - [ ] Fetch, render and style Boxes and Flowers
 - [ ] Decide file/folder structure for nested react components' SCSS
 - [ ] Decide how to style app
+- [x] Code for clicking on a box
 - [x] Create flower SVG and use in App, fill color taken from props
 
 ## Backend/data
