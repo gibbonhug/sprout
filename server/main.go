@@ -64,7 +64,7 @@ func main() {
 		}
 
 		// Unmarshal JSON data to boxSlice
-		var boxSlice []*flower.Flower
+		var boxSlice []*flower.Box
 
 		err = json.Unmarshal(boxJSON, &boxSlice)
 		if err != nil {
