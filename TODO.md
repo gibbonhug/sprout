@@ -9,6 +9,7 @@
 - [x] Create flower SVG and use in App, fill color taken from props
 
 ## Backend/data
+- [ ] Create GET endpoints for flower, rlns etc by id
 - [ ] Create POST endpoints for breeding flowers
 - [ ] Finish structuring backend more (not just main.go)
   - [ ] Create final structs for Boxes (flower pots/patches) and Flowers, relationships, etc
