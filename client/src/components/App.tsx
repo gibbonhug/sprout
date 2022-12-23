@@ -4,6 +4,7 @@ import Box from './Box';
 import { BoxProps } from '../interfaces';
 import '../scss/react_components/App.scss';
 
+// Backend server
 export const SERVER_ENDPOINT = 'http://localhost:3000';
 
 const fetcher = (url: string) =>
