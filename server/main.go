@@ -1,10 +1,12 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"log"
 	"net/http"
-	"encoding/json"
+	"os"
 	"strconv"
 
 	"github.com/gibbonhug/sprout/flower"
@@ -98,7 +100,7 @@ func main() {
 	r.Get("/flowers", func(w http.ResponseWriter, r *http.Request) {
 		setLocalJSONHeaders(w)
 
-		flowers, err := ioutil.ReadFile("./data/boxes.json")
+		flowers, err := ioutil.ReadFile("./data/flowers.json")
 
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
@@ -151,6 +153,43 @@ func main() {
 
 		// Flower with this ID does not exist
 		http.Error(w, "Data does not exist", http.StatusNotFound)
+
+	})
+
+	// /flowers POST endpoint: Create a flower and update JSON file
+	r.Post("/flowers", func(w http.ResponseWriter, r *http.Request) {
+		// Decode JSON data sent in this request, as a Flower
+		decoder := json.NewDecoder(r.Body)
+		var f flower.Flower // The data as a flower
+		err := decoder.Decode(&f)
+		if err != nil {
+			http.Error(w, "something bad happen", http.StatusBadRequest)
+		}
+
+		// Get old JSON data
+		oldFlowersJSON, err := ioutil.ReadFile("./data/flowers.json")
+		if err != nil {
+			http.Error(w, "something bad happen", http.StatusBadRequest)
+		}
+
+		// Unmarshall old JSON data into 'flowers'
+		var flowers []flower.Flower
+		err = json.Unmarshal(oldFlowersJSON, &flowers)
+		if err != nil {
+			http.Error(w, "something bad happen", http.StatusBadRequest)
+		}
+
+		// Append data in f (posted data) into flowers
+		flowers = append(flowers, f)
+
+		// convert flowers to json
+		flowersJSON, _ := json.Marshal(flowers)
+
+		// Update temp JSON database
+		err = os.WriteFile("./data/flowers.json", flowersJSON, 0777)
+		if err != nil {
+			log.Fatal(err)
+		}
 
 	})
 
