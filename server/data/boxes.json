@@ -2,7 +2,7 @@
     { "id": 0, "flower": { "id": 0, "colorPetal": "000000" } },
     { "id": 1, "flower": { "id": 1, "colorPetal": "ff0000" } },
     { "id": 2, "flower": { "id": 2, "colorPetal": "800000" } },
-    { "id": 3, "flower": null },
+    { "id": 3, "flower": { "id": 3, "colorPetal": "408284" } },
     { "id": 4, "flower": null },
     { "id": 5, "flower": null },
     { "id": 6, "flower": null },
