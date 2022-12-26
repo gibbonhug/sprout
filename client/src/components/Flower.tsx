@@ -17,6 +17,8 @@ function Flower(props: FlowerProps) {
         fill: props.colorPetal,
     };
 
+    console.log("Flower " + props.id + "; color " + props.colorPetal);
+
     return (
         <svg
             width="100"
