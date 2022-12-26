@@ -20,7 +20,7 @@
         - [x] Create initial Go func to combine two colors
         - [x] Find library to combine colors
   - [ ] Clone logic & API
-    - [ ] Create Go func to create a clone child
+    - [x] Create Go func to create a clone child
     - [ ] Create POST endpoint for new clone, which calls cloning logic
   - [x] Create POST endpoint for creating a flower
   - [x] Create GET endpoints for flower, rlns etc by id
