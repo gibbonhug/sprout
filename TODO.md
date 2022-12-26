@@ -12,11 +12,16 @@
 
 
 ## Backend/data
-- [ ] Create logic, endpoints for breeding flowers, adding to screen & Improve API endpoints
-  - [ ] Create Go function to breed two flowers (weighted average towards middle of 2 colors); Later will have mutation % as part of Flower DNA etc etc
-    - [x] Create initial Go func to breed two flowers (50/50 blend of flower petal DNA)
-      - [x] Create initial Go func to combine two colors
-      - [x] Find library to combine colors
+- [ ] Create logic, endpoints for breeding & cloning flowers, adding to screen
+  - [ ] Pair logic & API
+    - [ ] Create POST endpoint for new pair, which calls pairing logic
+    - [ ] Create Go function to breed two flowers (weighted average towards middle of 2 colors); Later will have mutation % as part of Flower DNA etc etc
+      - [x] Create initial Go func to breed two flowers (50/50 blend of flower petal DNA)
+        - [x] Create initial Go func to combine two colors
+        - [x] Find library to combine colors
+  - [ ] Clone logic & API
+    - [ ] Create Go func to create a clone child
+    - [ ] Create POST endpoint for new clone, which calls cloning logic
   - [x] Create POST endpoint for creating a flower
   - [x] Create GET endpoints for flower, rlns etc by id
 - [ ] Finish structuring backend more (not just main.go)
