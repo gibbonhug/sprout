@@ -1,7 +1,7 @@
 /**
  * See Go 'Flower' struct
  * - id: Unique unsigned ID
- * - colorPetal: Hex color of petals (without #)
+ * - colorPetal: Hex color of petals (with #)
 */
 export interface FlowerProps {
     id: number;

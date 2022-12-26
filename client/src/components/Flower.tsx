@@ -14,7 +14,7 @@ function Flower(props: FlowerProps) {
         (TypeScript expects style svg property to be an object, not a string)
     */
     const flowerStyle = {
-        fill: '#' + props.colorPetal,
+        fill: props.colorPetal,
     };
 
     return (

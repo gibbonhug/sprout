@@ -7,7 +7,7 @@ package flower
 // Flowers
 type Flower struct {
 	ID         uint    `json:"id"` // ID of the flower
-	ColorPetal string `json:"colorPetal"` // Hex color
+	ColorPetal string `json:"colorPetal"` // Hex color with leading '#'
 }
 
 // Boxes flowers are stored in
