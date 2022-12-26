@@ -36,7 +36,13 @@ func blend5050(str1 string, str2 string) string {
 	return blendedHex
 }
 
-// Function to take two Flowers and breed them returning child
-func BreedPair(flower1 *Flower, flower2 *Flower) *Flower {
-	
+// Function to take two Flower parents and breed them returning child
+// Temporarily takes child flower's id as a parameter
+func BreedPair(parent1 *Flower, parent2 *Flower, id uint) *Flower {
+	child := Flower{}
+
+	child.ID = id
+	child.ColorPetal = blend5050(parent1.ColorPetal, parent2.ColorPetal)
+
+	return &child
 }
