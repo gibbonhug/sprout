@@ -29,8 +29,9 @@
   - [x] Design and create temporary structs
   - [x] Create new flower package
   - [x] Move HTTP handlers outside of main.go to declutter
-- [ ] Store data in local storage + DB (user login)
-  - [ ] Create database | decide database
+- [ ] Store data in DB (user login)
+  - [ ] Create database
+    - [x] Decide database
   - [ ] User login/authentication
 - [x] Temporary JSON database
 
