@@ -30,9 +30,14 @@
   - [x] Create new flower package
   - [x] Move HTTP handlers outside of main.go to declutter
 - [ ] Store data in DB (user login)
-  - [ ] Rework current code to use database
+  - [ ] Complete rework of current code to use database
+    - [x] Figure out database connection .env
+    - [x] Use pgx global connection
+    - [x] Fetch flowers from db
+    - [ ] ...Fetch other data from DB
+    - [ ] Change ugly temp fetching from DB to better functions
   - [x] Connect to database
-    - [x] Create database with initial tables and rows (copy of JSON data)
+    - [x] Fill database with initial tables and rows (copy of JSON data), finish setup
       - [x] Decide database
   - [ ] User login/authentication
 - [x] Temporary JSON database
