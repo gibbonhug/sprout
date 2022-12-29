@@ -6,6 +6,8 @@ import (
 
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
+
+	"github.com/gibbonhug/sprout/data"
 )
 
 // Func creates a server on port 3000 with chi,
@@ -13,6 +15,15 @@ import (
 // This is done because database for this application does not exist yet,
 // to be able to have basic functionality while developing
 func main() {
+	/*
+		CONNECT TO DATABASE (connection will be used in /handlers)
+	*/
+	_, err := data.Connect()
+	if err != nil {
+		fmt.Println("Error connecting to database")
+		panic(err)
+	}
+
 	r := chi.NewRouter()
 	r.Use(middleware.Logger)
 

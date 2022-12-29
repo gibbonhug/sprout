@@ -84,7 +84,7 @@ func GetBoxesParam(w http.ResponseWriter, r *http.Request) {
 func GetFlowers(w http.ResponseWriter, r *http.Request) {
 	setLocalJSONHeaders(w)
 
-	flowers, err := data.GetAllFlowersAsJson()
+	flowers, err := data.GetAllFlowersAsJson(data.DB)
 
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)

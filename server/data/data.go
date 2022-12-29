@@ -1,4 +1,5 @@
-// Package is a work in progress
+/* Package is a work in progress
+*/
 package data
 
 import (
@@ -11,16 +12,24 @@ import (
 	"github.com/gibbonhug/sprout/flower"
 )
 
+// Global connection variable
+var DB *pgx.Conn
+
+// Sets DB global connection to new pgx connection with .env connection url
 func Connect() (*pgx.Conn, error) {
 	conn, err := pgx.Connect(context.Background(), os.Getenv("SPROUT_DATABASE_URL"))
 
-	return conn, err
+	if err != nil {
+		return nil, err
+	}
+
+	DB = conn
+
+	return DB, nil
 }
 
 // Get all flowers from database and return them as json array
-func GetAllFlowersAsJson() ([]byte, error) {
-	conn, err := pgx.Connect(context.Background(), os.Getenv("SPROUT_DATABASE_URL"))
-
+func GetAllFlowersAsJson(conn *pgx.Conn) ([]byte, error) {
 	flowerRows, err := conn.Query(context.Background(), "SELECT * FROM flower")
 
 	if err != nil {
