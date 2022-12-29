@@ -30,8 +30,10 @@
   - [x] Create new flower package
   - [x] Move HTTP handlers outside of main.go to declutter
 - [ ] Store data in DB (user login)
-  - [ ] Create database
-    - [x] Decide database
+  - [ ] Rework current code to use database
+  - [x] Connect to database
+    - [x] Create database with initial tables and rows (copy of JSON data)
+      - [x] Decide database
   - [ ] User login/authentication
 - [x] Temporary JSON database
 
