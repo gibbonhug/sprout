@@ -9,6 +9,8 @@ import (
 	"strconv"
 
 	"github.com/gibbonhug/sprout/flower"
+	"github.com/gibbonhug/sprout/data"
+
 	"github.com/go-chi/chi/v5"
 )
 
@@ -82,7 +84,7 @@ func GetBoxesParam(w http.ResponseWriter, r *http.Request) {
 func GetFlowers(w http.ResponseWriter, r *http.Request) {
 	setLocalJSONHeaders(w)
 
-	flowers, err := ioutil.ReadFile("./data/flowers.json")
+	flowers, err := data.GetAllFlowersAsJson()
 
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
