@@ -8,7 +8,6 @@ import (
 	"os"
 	"strconv"
 
-	"github.com/gibbonhug/sprout/flower"
 	"github.com/gibbonhug/sprout/data"
 
 	"github.com/go-chi/chi/v5"
@@ -53,7 +52,7 @@ func GetBoxesParam(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Unmarshal JSON data to boxSlice
-	var boxSlice []*flower.Box
+	var boxSlice []*data.Box
 
 	err = json.Unmarshal(boxJSON, &boxSlice)
 	if err != nil {
@@ -109,7 +108,7 @@ func GetFlowersParam(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Unmarshal JSON data to flowersSlice
-	var flowersSlice []*flower.Flower
+	var flowersSlice []*data.Flower
 
 	err = json.Unmarshal(flowersJSON, &flowersSlice)
 	if err != nil {
@@ -140,7 +139,7 @@ func GetFlowersParam(w http.ResponseWriter, r *http.Request) {
 func PostFlowers(w http.ResponseWriter, r *http.Request) {
 	// Decode JSON data sent in this request, as a Flower
 	decoder := json.NewDecoder(r.Body)
-	var f flower.Flower // The data as a flower
+	var f data.Flower // The data as a flower
 	err := decoder.Decode(&f)
 	if err != nil {
 		http.Error(w, "something bad happen", http.StatusBadRequest)
@@ -153,7 +152,7 @@ func PostFlowers(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Unmarshall old JSON data into 'flowers'
-	var flowers []flower.Flower
+	var flowers []data.Flower
 	err = json.Unmarshal(oldFlowersJSON, &flowers)
 	if err != nil {
 		http.Error(w, "something bad happen", http.StatusBadRequest)
@@ -200,7 +199,7 @@ func GetPairRlnsParam(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Unmarshal JSON data to pairSlice
-	var pairSlice []*flower.PairRln
+	var pairSlice []*data.PairRln
 
 	err = json.Unmarshal(pairJSON, &pairSlice)
 	if err != nil {
@@ -256,7 +255,7 @@ func GetCloneRlnsParam(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Unmarshal JSON data to cloneSlice
-	var cloneSlice []*flower.CloneRln
+	var cloneSlice []*data.CloneRln
 
 	err = json.Unmarshal(cloneJSON, &cloneSlice)
 	if err != nil {

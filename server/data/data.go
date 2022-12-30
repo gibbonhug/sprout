@@ -1,5 +1,5 @@
 /* Package is a work in progress
-Not sure how to split up /data and /flower packages especially shape of data
+Not sure how to split up /data and /flower packages
 */
 package data
 
@@ -9,8 +9,6 @@ import (
 	"encoding/json"
 
 	"github.com/jackc/pgx/v5"
-
-	"github.com/gibbonhug/sprout/flower"
 )
 
 // Global connection variable
@@ -38,7 +36,7 @@ func GetAllFlowersAsJson(conn *pgx.Conn) ([]byte, error) {
 	}
 
 	// First turn the data to a slice
-	var flowerSlice []flower.Flower
+	var flowerSlice []Flower
 
 	for flowerRows.Next() {
 		values, err := flowerRows.Values()
@@ -50,7 +48,7 @@ func GetAllFlowersAsJson(conn *pgx.Conn) ([]byte, error) {
 		id := uint(values[0].(int32))
 		color := values[1].(string)
 
-		thisFlower := flower.Flower{ID: id, ColorPetal: color}
+		thisFlower := Flower{ID: id, ColorPetal: color}
 
 		flowerSlice = append(flowerSlice, thisFlower)
 	}

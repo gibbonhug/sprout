@@ -1,8 +1,12 @@
+/*
+	Package implements functions for flowers
+*/
 package flower
 
 import (
 	"log"
 
+	"github.com/gibbonhug/sprout/data"
 	"github.com/lucasb-eyer/go-colorful"
 )
 
@@ -38,8 +42,8 @@ func blend5050(str1 string, str2 string) string {
 
 // Function to take two Flower parents and breed them returning child
 // Temporarily takes child flower's id as a parameter
-func BreedPair(parent1 *Flower, parent2 *Flower, id uint) *Flower {
+func BreedPair(parent1 *data.Flower, parent2 *data.Flower, id uint) *data.Flower {
 	color := blend5050(parent1.ColorPetal, parent2.ColorPetal)
 
-	return &Flower{ID: id, ColorPetal: color}
+	return &data.Flower{ID: id, ColorPetal: color}
 }

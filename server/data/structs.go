@@ -2,7 +2,7 @@
 	Package implements functions and structs for flower-based functions
 	ie Flowers, flower boxes, relationships
 */
-package flower
+package data
 
 // Flowers
 type Flower struct {
