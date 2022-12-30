@@ -96,44 +96,24 @@ func GetFlowersParam(w http.ResponseWriter, r *http.Request) {
 	setLocalJSONHeaders(w)
 
 	// Grab url param
-	id, err := strconv.Atoi(chi.URLParam(r, "id"))
+	intid, err := strconv.Atoi(chi.URLParam(r, "id"))
+	
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 	}
+
+	id := (uint)(intid)
 
 	// Get JSON data
-	flowersJSON, err := ioutil.ReadFile("./data/flowers.json")
+	flowerJSON, err := data.GetFlowerFromIDAsJson(data.DB, id)
+	
+	// Flower does not exist, or perhaps a different error
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
+		http.Error(w, err.Error(), http.StatusNotFound)
 	}
 
-	// Unmarshal JSON data to flowersSlice
-	var flowersSlice []*data.Flower
-
-	err = json.Unmarshal(flowersJSON, &flowersSlice)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
-	}
-
-	// Loop through flowers to find one with this ID
-
-	var returnData []byte
-
-	for _, flower := range flowersSlice {
-		if flower.ID == uint(id) {
-			returnData, err = json.Marshal(flower)
-
-			if err != nil {
-				http.Error(w, err.Error(), http.StatusBadRequest)
-			}
-
-			w.Write(returnData)
-			return
-		}
-	}
-
-	// Flower with this ID does not exist
-	http.Error(w, "Data does not exist", http.StatusNotFound)
+	w.Write(flowerJSON)
+	return
 }
 
 func PostFlowers(w http.ResponseWriter, r *http.Request) {
