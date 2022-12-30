@@ -83,7 +83,7 @@ func GetBoxesParam(w http.ResponseWriter, r *http.Request) {
 func GetFlowers(w http.ResponseWriter, r *http.Request) {
 	setLocalJSONHeaders(w)
 
-	flowers, err := data.GetAllFlowersAsJson()
+	flowers, err := data.GetAllFlowerJson()
 
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
@@ -105,9 +105,8 @@ func GetFlowersParam(w http.ResponseWriter, r *http.Request) {
 	id := (int32)(intid)
 
 	// Get JSON data
-	flowerJSON, err := data.GetFlowerFromIDAsJson(id)
+	flowerJSON, err := data.GetFlowerFromIDJson(id)
 	
-	// Flower does not exist, or perhaps a different error
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusNotFound)
 	}
@@ -154,111 +153,67 @@ func PostFlowers(w http.ResponseWriter, r *http.Request) {
 func GetPairRlns(w http.ResponseWriter, r *http.Request) {
 	setLocalJSONHeaders(w)
 
-	prlns, err := ioutil.ReadFile("./data/pairrelationships.json")
+	pairs, err := data.GetAllPairJson()
 
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 	}
 
-	w.Write(prlns)
+	w.Write(pairs)
 }
 
 func GetPairRlnsParam(w http.ResponseWriter, r *http.Request) {
 	setLocalJSONHeaders(w)
 
 	// Grab url param
-	id, err := strconv.Atoi(chi.URLParam(r, "id"))
+	intid, err := strconv.Atoi(chi.URLParam(r, "id"))
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 	}
+
+	id := (int32)(intid)
 
 	// Get JSON data
-	pairJSON, err := ioutil.ReadFile("./data/pairrelationships.json")
+	pairJSON, err := data.GetPairFromIDJson(id)
+
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 	}
 
-	// Unmarshal JSON data to pairSlice
-	var pairSlice []*data.PairRln
-
-	err = json.Unmarshal(pairJSON, &pairSlice)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
-	}
-
-	// Loop through flowers to find one with this ID
-
-	var returnData []byte
-
-	for _, pair := range pairSlice {
-		if pair.ID == int32(id) {
-			returnData, err = json.Marshal(pair)
-
-			if err != nil {
-				http.Error(w, err.Error(), http.StatusBadRequest)
-			}
-
-			w.Write(returnData)
-			return
-		}
-	}
-
-	// Pair with this ID does not exist
-	http.Error(w, "Data does not exist", http.StatusNotFound)
+	w.Write(pairJSON)
+	return
 }
 
 func GetCloneRlns(w http.ResponseWriter, r *http.Request) {
 	setLocalJSONHeaders(w)
 
-	crlns, err := ioutil.ReadFile("./data/clonerelationships.json")
+	clones, err := data.GetAllCloneJson()
 
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 	}
 
-	w.Write(crlns)
+	w.Write(clones)
 }
 
 func GetCloneRlnsParam(w http.ResponseWriter, r *http.Request) {
 	setLocalJSONHeaders(w)
 
 	// Grab url param
-	id, err := strconv.Atoi(chi.URLParam(r, "id"))
+	intid, err := strconv.Atoi(chi.URLParam(r, "id"))
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 	}
+
+	id := (int32)(intid)
 
 	// Get JSON data
-	cloneJSON, err := ioutil.ReadFile("./data/clonerelationships.json")
+	cloneJSON, err := data.GetCloneFromIDJson(id)
+
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
+		http.Error(w, err.Error(), http.StatusNotFound)
 	}
 
-	// Unmarshal JSON data to cloneSlice
-	var cloneSlice []*data.CloneRln
-
-	err = json.Unmarshal(cloneJSON, &cloneSlice)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
-	}
-
-	// Loop through clones to find one with this ID
-
-	var returnData []byte
-
-	for _, clone := range cloneSlice {
-		if clone.ID == int32(id) {
-			returnData, err = json.Marshal(clone)
-
-			if err != nil {
-				http.Error(w, err.Error(), http.StatusBadRequest)
-			}
-
-			w.Write(returnData)
-			return
-		}
-	}
-
-	// Clone with this ID does not exist
-	http.Error(w, "Data does not exist", http.StatusNotFound)
+	w.Write(cloneJSON)
+	return
 }
