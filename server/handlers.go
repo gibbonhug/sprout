@@ -83,13 +83,15 @@ func GetBoxesParam(w http.ResponseWriter, r *http.Request) {
 func GetFlowers(w http.ResponseWriter, r *http.Request) {
 	setLocalJSONHeaders(w)
 
-	flowers, err := data.GetAllFlowerJson()
+	flower, err := data.GetAllFlower()
 
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 	}
 
-	w.Write(flowers)
+	flowerJson, _ := json.Marshal(flower)
+
+	w.Write(flowerJson)
 }
 
 func GetFlowersParam(w http.ResponseWriter, r *http.Request) {
@@ -153,13 +155,15 @@ func PostFlowers(w http.ResponseWriter, r *http.Request) {
 func GetPairRlns(w http.ResponseWriter, r *http.Request) {
 	setLocalJSONHeaders(w)
 
-	pairs, err := data.GetAllPairJson()
+	pair, err := data.GetAllPair()
 
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 	}
 
-	w.Write(pairs)
+	pairJson, _ := json.Marshal(pair)
+
+	w.Write(pairJson)
 }
 
 func GetPairRlnsParam(w http.ResponseWriter, r *http.Request) {
@@ -174,26 +178,30 @@ func GetPairRlnsParam(w http.ResponseWriter, r *http.Request) {
 	id := (int32)(intid)
 
 	// Get JSON data
-	pairJSON, err := data.GetPairFromIDJson(id)
+	pair, _ := data.GetPairFromIDJson(id)
 
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 	}
 
-	w.Write(pairJSON)
+	pairJson, _ := json.Marshal(pair)
+
+	w.Write(pairJson)
 	return
 }
 
 func GetCloneRlns(w http.ResponseWriter, r *http.Request) {
 	setLocalJSONHeaders(w)
 
-	clones, err := data.GetAllCloneJson()
+	clone, err := data.GetAllCloneJson()
 
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 	}
 
-	w.Write(clones)
+	cloneJson, _ := json.Marshal(clone)
+
+	w.Write(cloneJson)
 }
 
 func GetCloneRlnsParam(w http.ResponseWriter, r *http.Request) {
@@ -208,12 +216,14 @@ func GetCloneRlnsParam(w http.ResponseWriter, r *http.Request) {
 	id := (int32)(intid)
 
 	// Get JSON data
-	cloneJSON, err := data.GetCloneFromIDJson(id)
+	clone, err := data.GetCloneFromIDJson(id)
 
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusNotFound)
 	}
 
-	w.Write(cloneJSON)
+	cloneJson, _ := json.Marshal(clone)
+
+	w.Write(cloneJson)
 	return
 }

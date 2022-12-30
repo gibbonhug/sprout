@@ -9,7 +9,7 @@ import (
 )
 
 // Get all flowers from database and return them as json array
-func GetAllFlowerJson() ([]byte, error) {
+func GetAllFlower() ([]Flower, error) {
 	flowerRows, err := DB.Query(CTX, "SELECT * FROM flower")
 
 	if err != nil {
@@ -33,15 +33,8 @@ func GetAllFlowerJson() ([]byte, error) {
 		flowerSlice = append(flowerSlice, flower)
 	}
 
-	// Then turn it to JSON
-	flowerJson, err := json.Marshal(flowerSlice)
-
-	if err != nil {
-		return nil, errors.New("Problem marshaling into JSON")
-	}
-
 	// no error
-	return flowerJson, nil
+	return flowerSlice, nil
 }
 
 func GetFlowerFromIDJson(flowerID int32) ([]byte, error) {
@@ -79,8 +72,48 @@ func GetFlowerFromIDJson(flowerID int32) ([]byte, error) {
 	return flowerJson, nil	
 }
 
-// Get all clones from database and return them as json array
-func GetAllPairJson() ([]byte, error) {
+
+// Get all boxes from database and return them as json array
+// Entire flower which is inside box (if exists) is inside the json array
+//func GetAllBoxJson() ([]byte, error) {
+	//boxRows, err := DB.Query(CTX, "SELECT * FROM box")
+
+	//if err != nil {
+		//return nil, err
+	//}
+
+	// First turn the data to a slice
+	//var BoxSlice []Box
+
+	//rs := pgxscan.NewRowScanner(boxRows)
+
+	//for boxRows.Next() {
+		//var flower Flower
+
+		//err = rs.Scan(&flower)
+
+		//if err != nil {
+			//return nil, errors.New("Error scanning box")
+		//}
+		
+		//flowerSlice = append(flowerSlice, flower)
+	//}
+
+	// Then turn it to JSON
+	//flowerJson, err := json.Marshal(flowerSlice)
+
+	//if err != nil {
+		//return nil, errors.New("Problem marshaling into JSON")
+	//}
+
+	// no error
+	//return flowerJson, nil
+//}
+
+
+
+// Get all pairs from database and return them as json array
+func GetAllPair() ([]PairRln, error) {
 	pairRows, err := DB.Query(CTX, "SELECT * FROM pair")
 
 	if err != nil {
@@ -104,19 +137,10 @@ func GetAllPairJson() ([]byte, error) {
 		pairSlice = append(pairSlice, pair)
 	}
 
-	// Then turn it to JSON
-	pairJSON, err := json.Marshal(pairSlice)
-
-	if err != nil {
-		return nil, errors.New("Problem marshaling into JSON")
-	}
-
-	// no error
-	return pairJSON, nil
+	return pairSlice, nil
 }
 
-
-func GetPairFromIDJson(pairID int32) ([]byte, error) {
+func GetPairFromIDJson(pairID int32) (*PairRln, error) {
 	paramAsStr := fmt.Sprint(pairID)
 	queryString := "SELECT * FROM pair WHERE pair_id = " + paramAsStr
 
@@ -140,21 +164,12 @@ func GetPairFromIDJson(pairID int32) ([]byte, error) {
 		return nil, errors.New("Error scanning pair")
 	}
 
-	// Then turn it to JSON
-	pairJson, err := json.Marshal(pair)
-
-	if err != nil {
-		return nil, errors.New("Error marshaling pair")
-	}
-
 	// no error
-	return pairJson, nil	
+	return &pair, nil	
 }
 
-
-
 // Get all clones from database and return them as json array
-func GetAllCloneJson() ([]byte, error) {
+func GetAllCloneJson() ([]CloneRln, error) {
 	cloneRows, err := DB.Query(CTX, "SELECT * FROM clone")
 
 	if err != nil {
@@ -178,19 +193,12 @@ func GetAllCloneJson() ([]byte, error) {
 		cloneSlice = append(cloneSlice, clone)
 	}
 
-	// Then turn it to JSON
-	cloneJson, err := json.Marshal(cloneSlice)
-
-	if err != nil {
-		return nil, errors.New("Problem marshaling into JSON")
-	}
-
 	// no error
-	return cloneJson, nil
+	return cloneSlice, nil
 }
 
 
-func GetCloneFromIDJson(cloneID int32) ([]byte, error) {
+func GetCloneFromIDJson(cloneID int32) (*CloneRln, error) {
 	paramAsStr := fmt.Sprint(cloneID)
 	queryString := "SELECT * FROM clone WHERE clone_id = " + paramAsStr
 
@@ -214,14 +222,7 @@ func GetCloneFromIDJson(cloneID int32) ([]byte, error) {
 		return nil, errors.New("Error scanning clone")
 	}
 
-	// Then turn it to JSON
-	cloneJson, err := json.Marshal(clone)
-
-	if err != nil {
-		return nil, errors.New("Error marshaling clone")
-	}
-
 	// no error
-	return cloneJson, nil	
+	return &clone, nil	
 }
 
