@@ -1,7 +1,3 @@
-/*
-	Package implements functions and structs for flower-based functions
-	ie Flowers, flower boxes, relationships
-*/
 package data
 
 // Flowers
