@@ -42,7 +42,7 @@ func blend5050(str1 string, str2 string) string {
 
 // Function to take two Flower parents and breed them returning child
 // Temporarily takes child flower's id as a parameter
-func BreedPair(parent1 *data.Flower, parent2 *data.Flower, id uint) *data.Flower {
+func BreedPair(parent1 *data.Flower, parent2 *data.Flower, id int32) *data.Flower {
 	color := blend5050(parent1.ColorPetal, parent2.ColorPetal)
 
 	return &data.Flower{ID: id, ColorPetal: color}

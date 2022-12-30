@@ -2,27 +2,27 @@ package data
 
 // Flowers
 type Flower struct {
-	ID         uint    `json:"id"` // ID of the flower
-	ColorPetal string `json:"colorPetal"` // Hex color with leading '#'
+	ID         int32    `json:"id" db:"flower_id"` // ID of the flower
+	ColorPetal string `json:"colorPetal" db:"petal_color"` // Hex color with leading '#'
 }
 
 // Boxes flowers are stored in
 type Box struct {
-	ID uint `json:"id"` // ID of the box
+	ID int32 `json:"id" db:"box_id"` // ID of the box
 	Flower *Flower `json:"flower"` // Pointer to the Flower it contains
 }
 
 // Cloning a flower producing a child
 type CloneRln struct {
-	ID uint `json:"ID"` // ID of this relationship
-	ParentID uint `json:"parentID"` // ID of the parent flower
-	ChildID uint `json:"childID"` // ID of the child flower
+	ID int32 `json:"ID" db:"clone_id"` // ID of this relationship
+	ParentID int32 `json:"parentID" db:"parent_id"` // ID of the parent flower
+	ChildID int32 `json:"childID" db:"child_id"` // ID of the child flower
 }
 
 // Breeding 2 flowers producing a child
 type PairRln struct {
-	ID uint `json:"ID"` // ID of this relationship
-	Parent1ID uint `json:"parent1ID"` // ID of instigator parent flower
-	Parent2ID uint `json:"parent2ID"` // ID of the receiver parent flower
-	ChildID uint `json:"childID"` // ID of the child flower
+	ID int32 `json:"ID" db:"pair_id"` // ID of this relationship
+	Parent1ID int32 `json:"parent1ID" db:"parent1_id"` // ID of instigator parent flower
+	Parent2ID int32 `json:"parent2ID" db:"parent2_id"` // ID of the receiver parent flower
+	ChildID int32 `json:"childID" db:"child_id"` // ID of the child flower
 }

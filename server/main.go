@@ -18,6 +18,7 @@ func main() {
 	/*
 		CONNECT TO DATABASE (connection will be used in /handlers)
 	*/
+
 	_, err := data.Connect()
 	if err != nil {
 		fmt.Println("Error connecting to database")

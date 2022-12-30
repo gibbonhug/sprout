@@ -64,7 +64,7 @@ func GetBoxesParam(w http.ResponseWriter, r *http.Request) {
 	var returnData []byte
 
 	for _, box := range boxSlice {
-		if box.ID == uint(id) {
+		if box.ID == int32(id) {
 			returnData, err = json.Marshal(box)
 
 			if err != nil {
@@ -83,7 +83,7 @@ func GetBoxesParam(w http.ResponseWriter, r *http.Request) {
 func GetFlowers(w http.ResponseWriter, r *http.Request) {
 	setLocalJSONHeaders(w)
 
-	flowers, err := data.GetAllFlowersAsJson(data.DB)
+	flowers, err := data.GetAllFlowersAsJson()
 
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
@@ -102,10 +102,10 @@ func GetFlowersParam(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 	}
 
-	id := (uint)(intid)
+	id := (int32)(intid)
 
 	// Get JSON data
-	flowerJSON, err := data.GetFlowerFromIDAsJson(data.DB, id)
+	flowerJSON, err := data.GetFlowerFromIDAsJson(id)
 	
 	// Flower does not exist, or perhaps a different error
 	if err != nil {
@@ -191,7 +191,7 @@ func GetPairRlnsParam(w http.ResponseWriter, r *http.Request) {
 	var returnData []byte
 
 	for _, pair := range pairSlice {
-		if pair.ID == uint(id) {
+		if pair.ID == int32(id) {
 			returnData, err = json.Marshal(pair)
 
 			if err != nil {
@@ -247,7 +247,7 @@ func GetCloneRlnsParam(w http.ResponseWriter, r *http.Request) {
 	var returnData []byte
 
 	for _, clone := range cloneSlice {
-		if clone.ID == uint(id) {
+		if clone.ID == int32(id) {
 			returnData, err = json.Marshal(clone)
 
 			if err != nil {

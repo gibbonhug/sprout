@@ -1,5 +1,5 @@
 /* Package holds the 'global' database pgx connection variable, functions to query database, as well as models for data (flowers, boxes etc)
-*/
+ */
 package data
 
 import (
@@ -9,15 +9,20 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/jackc/pgx/v5"
+	"github.com/georgysavva/scany/v2/pgxscan"
+
+	"github.com/jackc/pgx/v5/pgxpool"
 )
 
-// Global connection variable
-var DB *pgx.Conn
+// Global connection variables
+var DB *pgxpool.Pool
+var CTX context.Context
 
 // Sets DB global connection to new pgx connection with .env connection url
-func Connect() (*pgx.Conn, error) {
-	conn, err := pgx.Connect(context.Background(), os.Getenv("SPROUT_DATABASE_URL"))
+func Connect() (*pgxpool.Pool, error) {
+	CTX = context.Background()
+
+	conn, err := pgxpool.New(CTX, os.Getenv("SPROUT_DATABASE_URL"))
 
 	if err != nil {
 		return nil, err
@@ -29,8 +34,8 @@ func Connect() (*pgx.Conn, error) {
 }
 
 // Get all flowers from database and return them as json array
-func GetAllFlowersAsJson(conn *pgx.Conn) ([]byte, error) {
-	flowerRows, err := conn.Query(context.Background(), "SELECT * FROM flower")
+func GetAllFlowersAsJson() ([]byte, error) {
+	flowerRows, err := DB.Query(CTX, "SELECT * FROM flower")
 
 	if err != nil {
 		return nil, err
@@ -39,70 +44,60 @@ func GetAllFlowersAsJson(conn *pgx.Conn) ([]byte, error) {
 	// First turn the data to a slice
 	var flowerSlice []Flower
 
+	rs := pgxscan.NewRowScanner(flowerRows)
+
 	for flowerRows.Next() {
-		values, err := flowerRows.Values()
+		var flower Flower
+
+		err = rs.Scan(&flower)
 
 		if err != nil {
-			return nil, err
+			return nil, errors.New("Error scanning flower")
 		}
-
-		id := uint(values[0].(int32))
-		color := values[1].(string)
-
-		thisFlower := Flower{ID: id, ColorPetal: color}
-
-		flowerSlice = append(flowerSlice, thisFlower)
+		
+		flowerSlice = append(flowerSlice, flower)
 	}
 
 	// Then turn it to JSON
 	flowerJson, err := json.Marshal(flowerSlice)
 
 	if err != nil {
-		return nil, err
+		return nil, errors.New("Problem marshalling into JSON")
 	}
 
 	// no error
 	return flowerJson, nil
 }
 
-func GetFlowerFromIDAsJson(conn *pgx.Conn, flowerID uint) ([]byte, error) {
+func GetFlowerFromIDAsJson(flowerID int32) ([]byte, error) {
 	paramAsStr := fmt.Sprint(flowerID)
 	queryString := "SELECT * FROM flower WHERE flower_id = " + paramAsStr
 
-	flowerRows, err := conn.Query(context.Background(), queryString)
+	flowerRows, err := DB.Query(CTX, queryString)
 
 	if err != nil {
 		return nil, err
 	}
 
+	if !flowerRows.Next() {
+		return nil, errors.New("Flower not found")
+	}
+	
+	rs := pgxscan.NewRowScanner(flowerRows)
+
 	var flower Flower
-	valid := false // To avoid returning 0-valued flower if the flower does not exist
 
-	for flowerRows.Next() {
-		valid = true // There is a flower with the param id so do not return error for invalid
+	err = rs.Scan(&flower)
 
-		values, err := flowerRows.Values()
-
-		if err != nil {
-			return nil, err
-		}
-
-		id := uint(values[0].(int32))
-		color := values[1].(string)
-
-		flower.ID = id
-		flower.ColorPetal = color
+	if err != nil {
+		return nil, errors.New("Error scanning flower")
 	}
 
 	// Then turn it to JSON
 	flowerJson, err := json.Marshal(flower)
 
 	if err != nil {
-		return nil, err
-	}
-
-	if !valid {
-		return nil, errors.New("Flower not found")
+		return nil, errors.New("Error marshaling flower")
 	}
 
 	// no error

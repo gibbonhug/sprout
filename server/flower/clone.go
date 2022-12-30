@@ -9,6 +9,6 @@ import (
 
 // Function to take a flower and clone it
 // Temporarily takes child's ID as a param
-func BreedClone(parent *data.Flower, id uint) *data.Flower {
+func BreedClone(parent *data.Flower, id int32) *data.Flower {
 	return &data.Flower{ID: id, ColorPetal: parent.ColorPetal}
 }
