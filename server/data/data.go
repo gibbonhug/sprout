@@ -1,5 +1,4 @@
-/* Package is a work in progress
-Not sure how to split up /data and /flower packages
+/* Package holds the 'global' database pgx connection variable, functions to query database, as well as models for data (flowers, boxes etc)
 */
 package data
 
