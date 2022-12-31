@@ -27,13 +27,15 @@ func GetHome(w http.ResponseWriter, r *http.Request) {
 func GetBoxes(w http.ResponseWriter, r *http.Request) {
 	setLocalJSONHeaders(w)
 
-	boxes, err := ioutil.ReadFile("./data/boxes.json")
+	box, err := data.GetAllBox()
 
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 	}
 
-	w.Write(boxes)
+	boxJson, _ := json.Marshal(box)
+
+	w.Write(boxJson)
 }
 
 func GetBoxesParam(w http.ResponseWriter, r *http.Request) {
@@ -107,13 +109,15 @@ func GetFlowersParam(w http.ResponseWriter, r *http.Request) {
 	id := (int32)(intid)
 
 	// Get JSON data
-	flowerJSON, err := data.GetFlowerFromIDJson(id)
+	flower, err := data.GetFlowerFromID(id)
 	
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusNotFound)
 	}
 
-	w.Write(flowerJSON)
+	flowerJson, _ := json.Marshal(flower)
+
+	w.Write(flowerJson)
 	return
 }
 
@@ -178,7 +182,7 @@ func GetPairRlnsParam(w http.ResponseWriter, r *http.Request) {
 	id := (int32)(intid)
 
 	// Get JSON data
-	pair, _ := data.GetPairFromIDJson(id)
+	pair, _ := data.GetPairFromID(id)
 
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
@@ -193,7 +197,7 @@ func GetPairRlnsParam(w http.ResponseWriter, r *http.Request) {
 func GetCloneRlns(w http.ResponseWriter, r *http.Request) {
 	setLocalJSONHeaders(w)
 
-	clone, err := data.GetAllCloneJson()
+	clone, err := data.GetAllClone()
 
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
@@ -216,7 +220,7 @@ func GetCloneRlnsParam(w http.ResponseWriter, r *http.Request) {
 	id := (int32)(intid)
 
 	// Get JSON data
-	clone, err := data.GetCloneFromIDJson(id)
+	clone, err := data.GetCloneFromID(id)
 
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusNotFound)

@@ -1,7 +1,7 @@
 package data
 
 import (
-	"encoding/json"
+	"database/sql"
 	"errors"
 	"fmt"
 
@@ -37,7 +37,7 @@ func GetAllFlower() ([]Flower, error) {
 	return flowerSlice, nil
 }
 
-func GetFlowerFromIDJson(flowerID int32) ([]byte, error) {
+func GetFlowerFromID(flowerID int32) (*Flower, error) {
 	paramAsStr := fmt.Sprint(flowerID)
 	queryString := "SELECT * FROM flower WHERE flower_id = " + paramAsStr
 
@@ -61,54 +61,53 @@ func GetFlowerFromIDJson(flowerID int32) ([]byte, error) {
 		return nil, errors.New("Error scanning flower")
 	}
 
-	// Then turn it to JSON
-	flowerJson, err := json.Marshal(flower)
-
-	if err != nil {
-		return nil, errors.New("Error marshaling flower")
-	}
-
-	// no error
-	return flowerJson, nil	
+	return &flower, nil
 }
 
 
 // Get all boxes from database and return them as json array
 // Entire flower which is inside box (if exists) is inside the json array
-//func GetAllBoxJson() ([]byte, error) {
-	//boxRows, err := DB.Query(CTX, "SELECT * FROM box")
+func GetAllBox() ([]Box, error) {
+	boxRows, err := DB.Query(CTX, "SELECT * FROM box")
 
-	//if err != nil {
-		//return nil, err
-	//}
+	if err != nil {
+		return nil, err
+	}
 
 	// First turn the data to a slice
-	//var BoxSlice []Box
+	var boxSlice []Box
 
-	//rs := pgxscan.NewRowScanner(boxRows)
-
-	//for boxRows.Next() {
-		//var flower Flower
-
-		//err = rs.Scan(&flower)
-
-		//if err != nil {
-			//return nil, errors.New("Error scanning box")
-		//}
+	// Special logic for adding flower struct to box
+	for boxRows.Next() {
+		values, err := boxRows.Values()
 		
-		//flowerSlice = append(flowerSlice, flower)
-	//}
+		if err != nil {
+			return nil, errors.New("Error scanning box")
+		}
 
-	// Then turn it to JSON
-	//flowerJson, err := json.Marshal(flowerSlice)
+		var box Box
 
-	//if err != nil {
-		//return nil, errors.New("Problem marshaling into JSON")
-	//}
+		boxID := values[0].(int32)
+		box.ID = boxID
+
+		var floid sql.NullInt32
+		err = boxRows.Scan(&floid)
+
+		var flower *Flower 
+
+		// Null value from DB will be set to 0 value 
+		// If box has flower data will not be null
+		if !notNil {
+			flower, err = GetFlowerFromID(flowerID)
+			box.Flower = flower
+		}
+		
+		boxSlice = append(boxSlice, box)
+	}
 
 	// no error
-	//return flowerJson, nil
-//}
+	return boxSlice, nil
+}
 
 
 
@@ -140,7 +139,7 @@ func GetAllPair() ([]PairRln, error) {
 	return pairSlice, nil
 }
 
-func GetPairFromIDJson(pairID int32) (*PairRln, error) {
+func GetPairFromID(pairID int32) (*PairRln, error) {
 	paramAsStr := fmt.Sprint(pairID)
 	queryString := "SELECT * FROM pair WHERE pair_id = " + paramAsStr
 
@@ -169,7 +168,7 @@ func GetPairFromIDJson(pairID int32) (*PairRln, error) {
 }
 
 // Get all clones from database and return them as json array
-func GetAllCloneJson() ([]CloneRln, error) {
+func GetAllClone() ([]CloneRln, error) {
 	cloneRows, err := DB.Query(CTX, "SELECT * FROM clone")
 
 	if err != nil {
@@ -198,7 +197,7 @@ func GetAllCloneJson() ([]CloneRln, error) {
 }
 
 
-func GetCloneFromIDJson(cloneID int32) (*CloneRln, error) {
+func GetCloneFromID(cloneID int32) (*CloneRln, error) {
 	paramAsStr := fmt.Sprint(cloneID)
 	queryString := "SELECT * FROM clone WHERE clone_id = " + paramAsStr
 
