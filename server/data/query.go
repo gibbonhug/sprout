@@ -9,8 +9,6 @@ import (
 
 // Get all flowers from database and return them as json array
 func GetAllFlower() ([]Flower, error) {
-	defer DB.Close()
-
 	flowerRows, err := DB.Query(CTX, "SELECT * FROM flower")
 
 	defer flowerRows.Close()
