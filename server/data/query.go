@@ -9,7 +9,11 @@ import (
 
 // Get all flowers from database and return them as json array
 func GetAllFlower() ([]Flower, error) {
+	defer DB.Close()
+
 	flowerRows, err := DB.Query(CTX, "SELECT * FROM flower")
+
+	defer flowerRows.Close()
 
 	if err != nil {
 		return nil, err
@@ -42,6 +46,8 @@ func GetFlowerFromID(flowerID int32) (*Flower, error) {
 
 	flowerRows, err := DB.Query(CTX, queryString)
 
+	defer flowerRows.Close()
+
 	if err != nil {
 		return nil, err
 	}
@@ -68,6 +74,8 @@ func GetFlowerFromID(flowerID int32) (*Flower, error) {
 // Entire flower which is inside box (if exists) is inside the json array
 func GetAllBox() ([]Box, error) {
 	boxRows, err := DB.Query(CTX, "SELECT * FROM box")
+
+	defer boxRows.Close()
 
 	if err != nil {
 		return nil, err
@@ -107,7 +115,7 @@ func GetAllBox() ([]Box, error) {
 		boxSlice = append(boxSlice, box)
 	}
 
-	// no error
+	//no error
 	return boxSlice, nil
 }
 
@@ -116,6 +124,8 @@ func GetBoxFromID(boxID int32) (*Box, error) {
 	queryString := "SELECT * FROM box WHERE box_id = " + paramAsStr
 
 	boxRows, err := DB.Query(CTX, queryString)
+	
+	defer boxRows.Close()
 
 	if err != nil {
 		return nil, err
@@ -160,6 +170,8 @@ func GetBoxFromID(boxID int32) (*Box, error) {
 func GetAllPair() ([]PairRln, error) {
 	pairRows, err := DB.Query(CTX, "SELECT * FROM pair")
 
+	defer pairRows.Close()
+
 	if err != nil {
 		return nil, err
 	}
@@ -190,6 +202,8 @@ func GetPairFromID(pairID int32) (*PairRln, error) {
 
 	pairRows, err := DB.Query(CTX, queryString)
 
+	defer pairRows.Close()
+
 	if err != nil {
 		return nil, err
 	}
@@ -215,6 +229,8 @@ func GetPairFromID(pairID int32) (*PairRln, error) {
 // Get all clones from database and return them as json array
 func GetAllClone() ([]CloneRln, error) {
 	cloneRows, err := DB.Query(CTX, "SELECT * FROM clone")
+
+	defer cloneRows.Close()
 
 	if err != nil {
 		return nil, err
@@ -247,6 +263,8 @@ func GetCloneFromID(cloneID int32) (*CloneRln, error) {
 	queryString := "SELECT * FROM clone WHERE clone_id = " + paramAsStr
 
 	cloneRows, err := DB.Query(CTX, queryString)
+
+	defer cloneRows.Close()
 
 	if err != nil {
 		return nil, err

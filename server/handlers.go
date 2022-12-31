@@ -26,7 +26,7 @@ func GetHome(w http.ResponseWriter, r *http.Request) {
 
 func GetBoxes(w http.ResponseWriter, r *http.Request) {
 	setLocalJSONHeaders(w)
-
+	
 	box, err := data.GetAllBox()
 
 	if err != nil {
