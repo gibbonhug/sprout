@@ -1,7 +1,6 @@
 package data
 
 import (
-	"database/sql"
 	"errors"
 	"fmt"
 
@@ -90,16 +89,19 @@ func GetAllBox() ([]Box, error) {
 		boxID := values[0].(int32)
 		box.ID = boxID
 
-		var floid sql.NullInt32
-		err = boxRows.Scan(&floid)
+		// Type assertion to check if foregin key is not null
+
+		flowerID, flowerExists := values[1].(int32)
 
 		var flower *Flower 
 
-		// Null value from DB will be set to 0 value 
-		// If box has flower data will not be null
-		if !notNil {
+		if flowerExists {
 			flower, err = GetFlowerFromID(flowerID)
 			box.Flower = flower
+
+			if err != nil {
+				return nil, err
+			}
 		}
 		
 		boxSlice = append(boxSlice, box)
@@ -107,6 +109,49 @@ func GetAllBox() ([]Box, error) {
 
 	// no error
 	return boxSlice, nil
+}
+
+func GetBoxFromID(boxID int32) (*Box, error) {
+	paramAsStr := fmt.Sprint(boxID)
+	queryString := "SELECT * FROM box WHERE box_id = " + paramAsStr
+
+	boxRows, err := DB.Query(CTX, queryString)
+
+	if err != nil {
+		return nil, err
+	}
+
+	if !boxRows.Next() {
+		return nil, errors.New("Box not found")
+	}
+	
+	values, err := boxRows.Values()
+		
+	if err != nil {
+		return nil, errors.New("Error scanning box")
+	}
+
+	var box Box
+
+	boxIDdata := values[0].(int32)
+	box.ID = boxIDdata
+
+	// Type assertion to check if foregin key is not null
+
+	flowerID, flowerExists := values[1].(int32)
+
+	var flower *Flower 
+
+	if flowerExists {
+		flower, err = GetFlowerFromID(flowerID)
+		box.Flower = flower
+
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	return &box, nil
 }
 
 

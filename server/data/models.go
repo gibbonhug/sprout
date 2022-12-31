@@ -9,7 +9,7 @@ type Flower struct {
 // Boxes flowers are stored in
 type Box struct {
 	ID int32 `json:"id" db:"box_id"` // ID of the box
-	Flower int32 `json:"flower"` // Pointer to the Flower it contains
+	Flower *Flower `json:"flower"` // Pointer to the Flower it contains
 }
 
 // Cloning a flower producing a child

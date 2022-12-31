@@ -42,44 +42,24 @@ func GetBoxesParam(w http.ResponseWriter, r *http.Request) {
 	setLocalJSONHeaders(w)
 
 	// Grab url param
-	id, err := strconv.Atoi(chi.URLParam(r, "id"))
+	intid, err := strconv.Atoi(chi.URLParam(r, "id"))
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 	}
+
+	id := (int32)(intid)
 
 	// Get JSON data
-	boxJSON, err := ioutil.ReadFile("./data/boxes.json")
+	box, err := data.GetBoxFromID(id)
+
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
+		http.Error(w, err.Error(), http.StatusNotFound)
 	}
 
-	// Unmarshal JSON data to boxSlice
-	var boxSlice []*data.Box
+	boxJson, _ := json.Marshal(box)
 
-	err = json.Unmarshal(boxJSON, &boxSlice)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
-	}
-
-	// Loop through flowers to find one with this ID
-
-	var returnData []byte
-
-	for _, box := range boxSlice {
-		if box.ID == int32(id) {
-			returnData, err = json.Marshal(box)
-
-			if err != nil {
-				http.Error(w, err.Error(), http.StatusBadRequest)
-			}
-
-			w.Write(returnData)
-			return
-		}
-	}
-
-	// Box with this ID does not exist
-	http.Error(w, "Data does not exist", http.StatusNotFound)
+	w.Write(boxJson)
+	return
 }
 
 func GetFlowers(w http.ResponseWriter, r *http.Request) {
