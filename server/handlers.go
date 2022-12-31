@@ -36,6 +36,7 @@ func GetBoxes(w http.ResponseWriter, r *http.Request) {
 	boxJson, _ := json.Marshal(box)
 
 	w.Write(boxJson)
+	return
 }
 
 func GetBoxesParam(w http.ResponseWriter, r *http.Request) {
